@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" id="public_head">
+    <meta charset="UTF-8">
+    <title>软件学院比赛管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/public.css}" href="../css/public.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../css/style.css"/>
+
+
+</head>
+<body>
+
+
+<!--头部-->
+<header class="publicHeader" id="public_header">
+    <h1>软件学院比赛管理系统(管理员端)</h1>
+    <div class="publicHeaderR">
+        <p><span>你好！</span><span style="color: #fff21b"> [[${session.loginUser.teacherName}]]</span> , 欢迎你！</p>
+        <a  th:href="@{/logout}" href="login.html">退出</a>
+    </div>
+</header>
+<!--时间-->
+<section class="publicTime" id="public_time">
+    <span id="time">2028年01月01日 11:11  星期一</span>
+    <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
+</section>
+
+
+<!--主体内容-->
+<section class="publicMian " >
+    <div class="left" id="public_left">
+        <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
+        <nav>
+            <ul class="list">
+                <li th:id="${activeUri=='race' ? 'active': ''}"><a th:href="@{/mrace}" href="../bill/list.html">比赛管理</a></li>
+                <li th:id="${activeUri=='team' ? 'active': ''}"><a  th:href="@{/team}" href="../provider/list.html">队伍查看</a></li>
+                <li th:id="${activeUri=='teacher' ? 'active': ''}"><a th:href="@{/teacherManager}" href="../user/list.html">教师管理</a></li>
+                <li th:id="${activeUri=='financial' ? 'active': ''}"><a th:href="@{/mfinancials}" href="../user/list.html">经费管理</a></li>
+                <li th:id="${activeUri=='student' ? 'active': ''}"><a th:href="@{/mstudentManager}" href="../user/list.html">学生管理</a></li>
+                <li th:id="${activeUri=='award' ? 'active': ''}"><a th:href="@{/mawards}" href="../main/password.html">比赛结果</a></li>
+                <li th:id="${activeUri=='work' ? 'active': ''}"><a th:href="@{/works}">查看教师工作量</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="right" style="border: red ">
+        hello
+    </div>
+</section>
+
+<footer class="footer" id="public_footer">
+    <div style="text-align:center;">
+        <p>
+            <a href="http://localhost:8080/" target="_blank">软件学院比赛管理系统</a> 版权所有
+        </p>
+    </div>
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+    <script th:src="@{/js/js.js}" ></script>
+    <script th:src="@{/js/time.js}" src="js/time.js"></script>
+</footer>
+
+</body>
+</html>

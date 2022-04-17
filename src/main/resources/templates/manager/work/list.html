@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='work')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>工作量管理 >> 所有教师列表</span>
+        </div>
+        <form id="searchForm" th:action="@{/searchworks}" th:method="get">
+            <div class="search">
+               <span>教师名字：</span>
+                <input type="text" th:value="${teacherName}"  name="teacherName" placeholder="请输入教师名称"/>
+                <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+                <a th:method="get" th:href="@{/writeAll}" href="#">导出所有</a>
+            </div>
+        </form>
+        <!--教师操作表格-->
+        <table class="providerTable" cellpadding="0" cellspacing="0" >
+            <tr class="firstTr">
+                <th width="10%">教师工号</th>
+                <th width="10%">教师名字</th>
+                <th width="10%">教师工作量</th>
+                <th width="15%">参与比赛名称</th>
+                <th width="15%">参与队伍名称</th>
+                <th width="40%">操作</th>
+
+            </tr>
+            <tr th:each="p: ${pageInfo.list}">
+                <td th:text="${p.teacherNumber}">PRO-CODE—001</td>
+                <td th:text="${p.teacherName}">PRO-CODE—001</td>
+                <td th:text="${p.raceLevel == 1?'0.8': p.raceLevel==2 ?'1':'1'}">PRO-CODE—001</td>
+                <td th:text="${p.raceName}">PRO-CODE—001</td>
+                <td th:text="${p.teamName}">PRO-CODE—001</td>
+                <td>
+<!--                    <a th:href="@{/work/}+${p.wid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>-->
+                    <!--  绑定属性    -->
+                    <a th:attr="del_uri=@{/work/}+${p.wid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>
+                </td>
+            </tr>
+
+
+            <tr class="firstTr" style="color: blue">
+                <th width="20%">&nbsp;</th>
+                <th width="30%"><p style="color: blue">当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p></th>
+                <th width="5%"><a style="color: blue" th:href="@{/works}">首页</a></th>
+                <th width="10%"><a style="color: blue" th:href="@{/works(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></th>
+                <th width="15%"><a style="color: blue" th:href="@{/works(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></th>
+                <th width="20%" style="margin-left: 20%"><a style="color: blue" th:href="@{/works(pageNum=${pageInfo.pages})}">尾页</a></th>
+            </tr>
+
+        </table>
+
+
+    </div>
+</section>
+
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<form method="post", id="deleteForm">
+    <input type="hidden" name="_method" value="delete">
+    <div class="remove" id="removeProv">
+       <div class="removerChid">
+           <h2>提示</h2>
+           <div class="removeMain" >
+               <p>你确定要删除吗？</p>
+               <a href="#" id="yes">确定</a>
+               <a href="#" id="no">取消</a>
+           </div>
+       </div>
+    </div>
+</form>
+
+
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

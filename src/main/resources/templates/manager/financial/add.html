@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='financial')">
+    </div>
+    <div>
+        <label>预计经费：</label>
+        <select name="predictId" >
+            <option value="">--请选择预计比赛项目--</option>
+            <option  th:each="predictList : ${predictLists}" th:value="${predictList.preid}" th:text="${predictList.raceName}"></option>
+        </select>
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>经费管理 >> 添加预计经费</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/addPredictFinancial}" th:method="post" action="#">
+                <div>
+                    <label>比赛项目：</label>
+                    <select name="raceId" >
+                        <option value="">--请选择比赛项目--</option>
+                        <option  th:each="race : ${races}" th:value="${race.rid}" th:text="${race.raceName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>队伍名字：</label>
+                    <select name="teamId" >
+                        <option value="">--请选择队伍--</option>
+                        <option  th:each="team : ${teams}" th:value="${team.temid}" th:text="${team.teamName}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="address">报名费：</label>
+                    <input type="text" name="paymentPrice" id="addr"/>
+                    <span>*请输入报名费用</p></span>
+                </div>
+
+                <div>
+                    <label for="people">差旅费：</label>
+                    <input type="text" name="carPrice" id="people"/>
+                    <span>*请输入差旅费</span>
+                </div>
+
+                <div>
+                    <label for="address">住宿费：</label>
+                    <input type="text" name="roomPrice" id="address"/>
+                    <span>*请输入住宿费</span>
+                </div>
+
+
+
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.WorkMapper">
+
+    <select id="getLists" resultType="com.competition.entities.WorkList">
+        select a.*,te.teacher_name,te.teacher_number,r.race_name,r.race_level,tea.team_name from work_info a
+
+
+        left join teacher_info te
+        on a.teacher_id = te.tid
+
+        left join race_info r
+        on  a.race_id = r.rid
+
+        left join team_info tea
+        on  a.team_id = tea.temid
+        where 1=1
+        <if test="teacherName != null and teacherName != ''">
+            and te.teacher_name like '%${teacherName}%'
+        </if>
+
+    </select>
+
+    <select id="getWorkListById" resultType="com.competition.entities.WorkList">
+        select a.*,te.teacher_name,te.teacher_number,r.race_name,r.race_level,tea.team_name from work_info a
+
+        left join teacher_info te
+        on a.teacher_id = te.tid
+
+        left join race_info r
+        on  a.race_id = r.rid
+
+        left join team_info tea
+        on  a.team_id = tea.temid
+
+        where `wid`=#{wid}
+
+    </select>
+
+    <insert id="addWork">
+        INSERT INTO `work_info`( `total_work`, `teacher_id`, `race_id`, `team_id`, `status`,`last_time`)
+        VALUES (#{totalWork},#{teacherId},#{raceId},#{teamId},#{status},now())
+    </insert>
+
+    <update id="updateWork">
+        UPDATE `work_info`
+        SET `total_work` = #{totalWork}, `teacher_id` = #{teacherId}, `race_id` = #{raceId}, `team_id` = #{teamId}, `status` = #{status}, `last_time` =now()
+        WHERE `wid` = #{wid};
+    </update>
+
+    <delete id="deleteWorkById">
+        delete from work_info where `wid`=#{wid}
+    </delete>
+</mapper>
+

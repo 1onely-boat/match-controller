@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.PredictFinancialMapper">
+
+
+
+    <select id="getLists" resultType="com.competition.entities.PredictFinancialList">
+        select t.*,tem.team_name,r.race_name
+        from predict_finance t
+
+        left join team_info tem
+        on  t.team_id = tem.temid
+
+        left join race_info r
+        on  t.race_id = r.rid
+        where 1=1
+        <if test="teamName != null and teamName != ''">
+            and tem.team_name like '%${teamName}%'
+        </if>
+    </select>
+
+    <insert id="addPredictFinancial">
+        INSERT INTO `predict_finance`(`team_id`, `race_id`, `payment_price`, `car_price`, `room_price`, `total_price`)
+        VALUES (#{teamId},#{raceId},#{paymentPrice},#{carPrice},#{roomPrice},#{totalPrice})
+    </insert>
+
+    <select id="getPredictFinancialById" resultType="com.competition.entities.PredictFinancialList">
+        select t.*,tem.team_name,r.race_name
+        from predict_finance t
+
+        left join team_info tem
+        on  t.team_id = tem.temid
+
+        left join race_info r
+        on  t.race_id = r.rid
+
+        where preid=#{preid}
+    </select>
+
+    <delete id="deletePredictFinancialById">
+        delete from predict_finance where preid = #{preid}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+</head>
+<body>
+<h1>-_- 404错误 -_- </h1>
+<hr>
+<h1 style="color: salmon;margin: auto">-_- 请您耐心等待,此功能正在努力开发中 -_- </h1>
+<!--在thymeleaf模版下才能使用以下代码，静态文件下不可以使用哦-->
+<!--所以想用以下输出格式必须放在templates文件下面-->
+<p>[[${timestamp}]]</p>
+<hr/>
+<p>[[${status}]]</p>
+
+<p>[[${message}]]</p>
+
+<p>[[${exception}]]</p>
+
+<p>[[${error}]]</p>
+
+<p>[[${company}]]</p>
+<input style=" width: 50px;height: 30px" type="button" value="返回" onclick="history.back(-1)"/>
+<hr/>
+</body>
+</html>

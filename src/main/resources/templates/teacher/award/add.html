@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='award')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>比赛管理 >> 比赛结果添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/addAward}" th:method="post" enctype="multipart/form-data">
+                <div>
+                    <label>比赛名称：</label>
+                    <select name="raceId" >
+                        <option value="">--请选择比赛名称--</option>
+                        <option  th:each="race : ${races}" th:value="${race.rid}" th:text="${race.raceName+'--'+race.raceLevel}" ></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="describe">比赛等级：</label>
+                    <select name="certificateLevel">
+                        <option selected value="校级">校级</option>
+                        <option  value="省级">省级</option>
+                        <option  value="国家级">国家级</option>
+                    </select>
+                </div>
+                <div>
+                    <label>参赛队伍：</label>
+                    <select name="teamId" >
+                        <option value="">--请选择比赛队伍--</option>
+                        <option th:each="teamList : ${teamLists}" th:value="${teamList.temid}"th:text="${teamList.teamName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>第一导师姓名：</label>
+                    <select name="firstTeacherid">
+                        <option value="">--请选择导师姓名--</option>
+                        <option th:each="teacher:${teachers}" th:value="${teacher.tid}" th:text="${teacher.teacherName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="address">证书编号：</label>
+                    <input type="text" name="certificateNumber" id="address"/>
+                    <span>*请输入获奖证书编号</span>
+                </div>
+                <div>
+                    <label for="fax">证书照片：</label>
+<!--                    <input type="text" name="certificatePicture" id="fax"/>-->
+                    <input type="file" name="fileUpload" id="fax">
+                </div>
+                <div>
+                    <label for="describe">现场照片：</label>
+<!--                    <input type="text" name="activityPicture" id="describe"/>-->
+                    <input type="file" name="fileUpload2" id="describe">
+                </div>
+                <div>
+                    <label>获奖情况：</label>
+                    <!--默认未获奖-->
+                    <select name="ifAward" >
+                        <option value="1">已获奖</option>
+                        <option selected value="1">未获奖</option>
+                    </select>
+                </div>
+                <div>
+                    <label>是否批准：</label>
+                    <!--默认未批准-->
+                    <select name="ifApprove" >
+                        <option value="1">给予批准</option>
+                        <option selected value="0">不批准</option>
+                    </select>
+                </div>
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+
+</body>
+</html>

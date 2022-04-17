@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='student')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>学生管理</span>
+        </div>
+        <form id="searchForm" th:action="@{/mstudentManager}" th:method="get">
+            <div class="search">
+                <span>学生姓名：</span>
+                <input type="text" th:value="${studentName}"  name="studentName" placeholder="请输入学生姓名"/>
+
+                <span>班级：</span>
+                <input type="text" th:value="${studentClass}"  name="studentClass" placeholder="请输入学生班级"/>
+                <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+              </div>
+        </form>
+        <!--经费操作表格-->
+        <table class="providerTable" cellpadding="0" cellspacing="0" >
+            <tr class="firstTr">
+                <th width="13%">学生学号</th>
+                <th width="13%">学生姓名</th>
+                <th width="13%">学生班级</th>
+                <th width="13%">学生电话</th>
+                <th width="13%">学生微信</th>
+                <th width="10%">报名状态</th>
+                <th width="25%">操作</th>
+            </tr>
+            <tr th:each="p: ${pageInfo.list}">
+                <td th:text="${p.studentNumber}">PRO-CODE—001</td>
+                <td th:text="${p.studentName}">吴翰清</td>
+                <td th:text="${p.studentClass}">161</td>
+                <td th:text="${p.studentMobile}">1232222</td>
+                <td th:text="${p.studentWechar}">122333wx</td>
+                <td th:text="${p.studentStatus == 1 ? '已报名' : '未报名'}">未报名</td>
+                <td>
+                    <a th:href="@{/mstudent/}+${p.sid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
+                </td>
+            </tr>
+
+
+            <tr class="firstTr" style="color: blue">
+                <th width="10%">&nbsp;</th>
+                <th width="19%"><p style="color: blue">当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p></th>
+                <th width="10%" style="border: none"></th>
+                <th width="13%"><a style="color: blue" th:href="@{/mstudentManager}">首页</a></th>
+                <th width="13%"><a style="color: blue" th:href="@{/mstudentManager(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></th>
+                <th width="10%"><a style="color: blue" th:href="@{/mstudentManager(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></th>
+                <th width="25%" style="margin-left: 20%"><a style="color: blue" th:href="@{/mstudentManager(pageNum=${pageInfo.pages})}">尾页</a></th>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+
+
+
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+
+</body>
+</html>

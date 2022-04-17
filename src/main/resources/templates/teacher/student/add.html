@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='student')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>学生管理页面 >> 学生添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/student}" th:method="post" action="#">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="providerName">学生姓名：</label>
+                    <input type="text" name="studentName" id="providerName"/>
+                    <span >*请输入学生姓名</span>
+                </div>
+                <div>
+                    <label for="people">学生班级：</label>
+                    <input type="text" name="studentClass" id="people"/>
+                    <span>*请输入学生班级</span>
+
+                </div>
+                <div>
+                    <label>学生性别：</label>
+                    <select name="studentSex">
+                        <option value="">--请选择--</option>
+                        <option selected  value="男">男</option>
+                        <option  value="女">女</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="address">学生学号：</label>
+                    <input type="text" name="studentNumber" id="address"/>
+                    <span>*请输入学生学号</span>
+                </div>
+                <div>
+                    <label for="fax">学生电话：</label>
+                    <input type="text" name="studentMobile" id="fax"/>
+                    <span>*请输入学生电话</span>
+                </div>
+                <div>
+                    <label for="describe">学生微信：</label>
+                    <input type="text" name="studentWechar" id="describe"/>
+                    <span>*请输入学生微信</span>
+                </div>
+                <div>
+                    <label for="describe">报名状态：</label>
+                    <select name="studentStatus">
+                        <option value="">--请选择--</option>
+                        <option   value="1">已报名</option>
+                        <option selected  value="0">未报名</option>
+                    </select>
+                </div>
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+
+</body>
+</html>

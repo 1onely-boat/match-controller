@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.FinancialMapper">
+
+
+
+    <select id="getLists" resultType="com.competition.entities.FinancialList">
+        select t.*,pred.payment_price,pred.car_price,pred.room_price,pred.total_price,tem.team_name,r.race_name
+        from final_finance t
+
+        left join predict_finance pred
+        on t.pre_id = pred.preid
+
+        left join team_info tem
+        on  t.team_id = tem.temid
+
+        left join race_info r
+        on  t.race_id = r.rid
+        where 1=1
+        <if test="teamName != null and teamName != ''">
+            and tem.team_name like '%${teamName}%'
+        </if>
+    </select>
+
+    <select id="getFinancialById" resultType="com.competition.entities.FinancialList">
+        select t.*,pred.payment_price,pred.car_price,pred.room_price,pred.total_price,tem.team_name,r.race_name
+        from final_finance t
+
+        left join predict_finance pred
+        on t.pre_id = pred.preid
+
+        left join team_info tem
+        on  t.team_id = tem.temid
+
+        left join race_info r
+        on  t.race_id = r.rid
+
+        where fid=#{fid}
+    </select>
+
+    <insert id="addFinancial">
+        INSERT INTO `final_finance`(`pre_id`,`team_id`, `race_id`, `payment_fee`, `car_fee`, `room_fee`, `total_fee`)
+        VALUES (#{preid},#{teamId},#{raceId},#{paymentFee},#{carFee},#{roomFee},#{totalFee})
+    </insert>
+    <delete id="deleteFinancialById">
+        delete from final_finance where fid = #{fid}
+    </delete>
+
+
+</mapper>

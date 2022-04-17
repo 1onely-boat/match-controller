@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.TeamMapper">
+
+
+
+    <select id="getMyLists" resultType="com.competition.entities.TeamList" parameterType="integer">
+        select t.*,te.teacher_name,te.teacher_mobile,s.student_name,s.student_mobile,r.race_name,r.race_level from team_info t
+        left join student_info s
+           on t.student_id = s.sid
+        left join race_info r
+           on  t.race_id = r.rid
+
+        left join teacher_info te
+            on  te.tid = t.teacher_id
+
+        where t.teacher_id=#{tid}
+
+    </select>
+
+
+    <select id="getLists" resultType="com.competition.entities.TeamList">
+        select t.*,te.teacher_name,te.teacher_mobile,s.student_name,s.student_mobile,r.race_name,r.race_level from team_info t
+        left join student_info s
+           on t.student_id = s.sid
+
+        left join race_info r
+           on  t.race_id = r.rid
+
+        left join teacher_info te
+        on  te.tid = t.teacher_id
+
+        where 1=1
+        <if test="teamName != null and teamName != ''">
+            and team_name like '%${teamName}%'
+        </if>
+    </select>
+
+
+    <select id="getTeamById" resultType="com.competition.entities.TeamList">
+        select t.*,te.teacher_name,te.teacher_mobile,s.student_name,s.student_mobile,r.race_name,r.race_begintime,r.race_endtime,r.race_level from team_info t
+        left join student_info s
+           on t.student_id = s.sid
+
+        left join race_info r
+           on  t.race_id = r.rid
+
+        left join teacher_info te
+           on  te.tid = t.teacher_id
+
+        where temid=#{temid}
+    </select>
+
+    <select id="getTeamByName" resultType="com.competition.entities.TeamList">
+        select t.*,te.teacher_name,te.teacher_mobile,s.student_name,s.student_mobile,r.race_name,r.race_begintime,r.race_endtime,r.race_level from team_info t
+        left join student_info s
+           on t.student_id = s.sid
+
+        left join race_info r
+           on  t.race_id = r.rid
+
+        left join teacher_info te
+           on  te.tid = t.teacher_id
+
+        where team_name=#{name}
+    </select>
+
+    <insert id="addTeamList">
+        INSERT INTO `team_info`( `team_name`, `race_id`, `student_id`, `production_name`, `production_info`, `teacher_id`, `team_status`,`update_id`,`update_time`)
+        VALUES (#{teamName},#{raceId},#{studentId},#{productionName},#{productionInfo},#{teacherId},#{teamStatus},#{updateId},now())
+    </insert>
+
+
+    <update id="updateTeam">
+        UPDATE `team_info`
+        SET `team_name` = #{teamName}, `race_id` = #{raceId}, `student_id` = #{studentId}, `production_name` = #{productionName}, `production_info` = #{productionInfo}, `teacher_id` =#{teacherId}, `team_status` = #{teamStatus}, `update_id` = #{updateId}, `update_time` = now()
+        WHERE `temid` = #{temid};
+    </update>
+
+    <delete id="deleteTeamById">
+        delete from team_info where temid=#{temid}
+    </delete>
+</mapper>
+

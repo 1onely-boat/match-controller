@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='competition')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>比赛管理</span>
+        </div>
+        <form id="searchForm" th:action="@{/trace}" th:method="get">
+            <div class="search">
+                <span>比赛名称：</span>
+                <input type="text" th:value="${raceName}"  name="raceName" placeholder="请输入比赛名称"/>
+                <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+            </div>
+        </form>
+        <!--经费操作表格-->
+        <table class="providerTable" cellpadding="0" cellspacing="0" >
+            <tr class="firstTr">
+                <th width="14%">比赛名称</th>
+                <th width="10%">比赛级别</th>
+                <th width="14%">报名开始时间</th>
+                <th width="14%">报名结束时间</th>
+                <th width="14%">比赛开始时间</th>
+                <th width="14%">比赛结束时间</th>
+                <th width="20%">操作</th>
+            </tr>
+            <tr th:each="p: ${pageInfo.list}">
+                <td th:text="${p.raceName}">PRO-CODE—001</td>
+                <td th:text="${p.raceLevel ==1 ? '校级' : p.raceLevel == 2 ? '省级' : '国家级'}">吴翰清</td>
+                <td th:text="${#dates.format(p.beginTime,'yyyy-MM-dd')}">161</td>
+                <td th:text="${#dates.format(p.endTime,'yyyy-MM-dd')}">1232222</td>
+                <td th:text="${#dates.format(p.raceBegintime,'yyyy-MM-dd')}">122333wx</td>
+                <td th:text="${#dates.format(p.raceEndtime,'yyyy-MM-dd')}"></td>
+                <td>
+                    <a th:href="@{/trace/}+${p.rid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
+                   </td>
+            </tr>
+
+
+            <tr class="firstTr" style="color: blue">
+                <th width="10%">&nbsp;</th>
+                <th width="18%"><p style="color: blue">当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p></th>
+                <th width="10%" style="border: none"></th>
+                <th width="14%"><a style="color: blue" th:href="@{/trace}">首页</a></th>
+                <th width="14%"><a style="color: blue" th:href="@{/trace(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></th>
+                <th width="14%"><a style="color: blue" th:href="@{/trace(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></th>
+                <th width="20%" style="margin-left: 20%"><a style="color: blue" th:href="@{/trace(pageNum=${pageInfo.pages})}">尾页</a></th>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+<!--点击删除按钮后弹出的页面-->
+<!--<div class="zhezhao"></div>
+<form method="post", id="deleteForm">
+    <input type="hidden" name="_method" value="delete">
+    <div class="remove" id="removeProv">
+       <div class="removerChid">
+           <h2>提示</h2>
+           <div class="removeMain" >
+               <p>你确定要删除吗？</p>
+               <a href="#" id="yes">确定</a>
+               <a href="#" id="no">取消</a>
+           </div>
+       </div>
+    </div>
+</form>-->
+
+
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+
+</body>
+</html>

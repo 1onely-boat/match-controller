@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='financial')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>预计经费管理->查看详情</span>
+        </div>
+        <div class="providerView">
+            <p><strong>队伍名称：</strong><span th:text="${financial.teamName}">PRO-CODE—001</span></p>
+            <p><strong>比赛名称：</strong><span th:text="${financial.raceName}">PRO-CODE—001</span></p>
+            <p><strong>预计报名费用：</strong><span th:text="${financial.paymentPrice}">PRO-CODE—001</span></p>
+            <p><strong>预计差旅费用：</strong><span th:text="${financial.carPrice}">PRO-CODE—001</span></p>
+            <p><strong>预计住宿费用：</strong><span th:text="${financial.roomPrice}">PRO-CODE—001</span></p>
+            <p><strong>预计总费用：</strong><span th:text="${financial.totalPrice}">PRO-CODE—001</span></p>
+            <a th:href="@{/mfinancials}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

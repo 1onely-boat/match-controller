@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.StudentMapper">
+
+    <select id="getLists" resultType="com.competition.entities.Student">
+        select * from student_info
+        where 1=1
+        <if test="studentName != null and studentName != ''">
+            and student_name like '%${studentName}%'
+        </if>
+        <if test="studentClass != null and studentClass != ''">
+            and student_class like '%${studentClass}%'
+        </if>
+    </select>
+
+    <select id="getStudentById" resultType="com.competition.entities.Student">
+        select * from student_info
+        where sid=#{sid}
+    </select>
+
+    <insert id="addStudent">
+        INSERT INTO `student_info`( `student_name`, `student_sex`, `student_class`, `student_number`, `student_mobile`, `student_wechar`, `student_status`)
+        VALUES (#{studentName},#{studentSex},#{studentClass},#{studentNumber},#{studentMobile},#{studentWechar},#{studentStatus})
+    </insert>
+
+
+    <update id="updateStudent">
+        UPDATE `student_info`
+        SET `student_name` = #{studentName}, `student_sex` = #{studentSex}, `student_class` = #{studentClass}, `student_number` = #{studentNumber}, `student_mobile` = #{studentMobile}, `student_wechar` =#{studentWechar}, `student_status` = #{studentStatus}
+        WHERE `sid` = #{sid};
+    </update>
+
+    <delete id="deleteStudentById">
+        delete from student_info where sid=#{sid}
+    </delete>
+</mapper>
+

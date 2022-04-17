@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='race')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>比赛管理页面 >> 修改比赛</span>
+        </div>
+        <div class="providerAdd">
+            <form id="updateForm" action="#" th:action="@{/mrace}" th:method="post">
+                <!--
+                发送put请求修改供应商信息
+                1. 在SpringMVC中配置HiddenHttpMethodFilter(SpringBoot自动配置好了) 2. 页面创建一个method="post"表单
+                3. 创建一个input标签 name="_method"，value="指定请求方式"
+                    -->
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="rid" th:value="${race.rid}" value=""/>
+
+
+                <div class="">
+                    <label for="providerName">比赛名称：</label>
+                    <input type="text" th:value="${race.raceName}" name="raceName" id="providerName" placeholder="请输入比赛名称"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label for="people">比赛级别：</label>
+                    <input type="text" th:value="${race.raceLevel}" name="raceLevel" id="people" />
+                    <span>*</span>
+
+                </div>
+                <div class="">
+                    <label for="providerName">主办方：</label>
+                    <input type="text" th:value="${race.raceMaster}" name="raceMaster" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">比赛地点：</label>
+                    <input type="text" th:value="${race.raceLocation}" name="raceLocation" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">比赛信息：</label>
+                    <input type="text" th:value="${race.raceInfo}" name="raceInfo" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">报名开始时间：</label>
+                    <input type="text" th:value="${#dates.format(race.beginTime,'yyyy-MM-dd')}" name="beginTime" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">报名结束时间：</label>
+                    <input type="text" th:value="${#dates.format(race.endTime,'yyyy-MM-dd')}" name="endTime" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">比赛开始时间：</label>
+                    <input type="text" th:value="${#dates.format(race.raceBegintime,'yyyy-MM-dd')}" name="raceBegintime" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">比赛结束时间：</label>
+                    <input type="text" th:value="${#dates.format(race.raceEndtime,'yyyy-MM-dd')}" name="raceEndtime" />
+                    <span >*</span>
+                </div>
+                <div class="">
+                    <label for="providerName">比赛网址链接：</label>
+                    <input type="text" th:value="${race.raceEndtime}" name="raceEndtime" />
+                    <span >*</span>
+                </div>
+
+
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#updateForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

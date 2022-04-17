@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.competition.mapper.AwardMapper">
+
+    <select id="getLists" resultType="com.competition.entities.AwardList">
+        select a.*,te.teacher_name,r.race_name,r.race_level,tea.team_name from award_info a
+        left join teacher_info te
+        on a.first_teacherid = te.tid
+
+        left join race_info r
+        on  a.race_id = r.rid
+
+        left join team_info tea
+        on  a.team_id = tea.temid
+
+        where 1=1
+        <if test="teacherName != null and teacherName != ''">
+            and te.teacher_name like '%${teacherName}%'
+        </if>
+
+        <if test="raceName != null and raceName != ''">
+            and r.race_name like '%${raceName}%'
+        </if>
+    </select>
+
+    <select id="getAwardListById" resultType="com.competition.entities.AwardList">
+        select a.*,te.teacher_name,r.race_name,r.race_level,tea.team_name from award_info a
+        left join teacher_info te
+        on a.first_teacherid = te.tid
+
+        left join race_info r
+        on  a.race_id = r.rid
+
+        left join team_info tea
+        on  a.team_id = tea.temid
+
+        where `aid`=#{aid}
+
+    </select>
+
+    <insert id="addAwardList">
+        INSERT INTO `award_info`( `race_id`, `team_id`, `first_teacherid`, `certificate_level`, `certificate_number`, `certificate_picture`, `activity_picture`,`if_award`,`if_approve`)
+        VALUES (#{raceId},#{teamId},#{firstTeacherid},#{certificateLevel},#{certificateNumber},#{certificatePicture},#{activityPicture},#{ifAward},#{ifApprove})
+    </insert>
+
+    <update id="updateAwardList">
+        UPDATE `award_info`
+        SET `race_id` = #{raceId}, `team_id` = #{teamId}, `first_teacherid` = #{firstTeacherid}, `certificate_level` = #{certificateLevel}, `certificate_number` = #{certificateNumber}, `certificate_picture` =#{certificatePicture}, `activity_picture` = #{activityPicture},`if_award` = #{ifAward},`if_approve` = #{ifApprove}
+        WHERE `aid` = #{aid};
+    </update>
+
+    <delete id="deleteAwardListById">
+        delete from award_info where `aid`=#{aid}
+    </delete>
+</mapper>
+

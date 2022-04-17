@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>比赛管理系统注意事项</p>
+<p>1 教师端</p>
+<p>上传图片AwardController这个控制类中图片路径需要自己进行修改</p>
+<p>//指定上传文件本地存储目录
+    String dirPath = "/Users/apple/Downloads/spaces_idea/src/main/resources/static/img/goods/";
+    自己修改以上路径(eg:D:software/project/src/main/resources/static/img/goods/)
+    ,否则上传失败
+
+    try{
+    String path = ResourceUtils.getURL("classpath:").getPath();
+    System.out.println(path+"<--path");
+    }catch (Exception e){}
+</p>
+<p>2 管理员</p>
+jar包运行  java -jar spring-boot-project1.0.1-SNAPSHOT.jar
+
+</body>
+</html>

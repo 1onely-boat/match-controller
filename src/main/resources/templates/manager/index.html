@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian">
+    <div class="left" th:replace="manager/public :: #public_left"></div>
+
+    <div class="right" style="border-color: red ;border: 2px">
+        <img class="wColck" th:src="@{/img/clock.jpg}" src="../img/clock.jpg" alt=""/>
+        <div class="wFont">
+            <p>你好亲爱的管理员</p>
+            <h2 th:text="${session.loginUser.teacherName}">Admin</h2>
+            <p>欢迎来到比赛管理系统!</p>
+			<span id="hours"></span>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+
+</body>
+</html>

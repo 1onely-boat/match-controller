@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='teams')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>队伍管理页面 >> 队伍添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/teams}" th:method="post" action="#">
+                <div class="">
+<!--                    providerName-->
+                    <label for="oldPassword">队伍名称：</label>
+                    <input type="text" name="teamName" autofocus="autofocus" required="required"  id="oldPassword"/>
+                    <span id="pwdText">*队伍名称(必填)</span>
+                </div>
+                <div>
+                    <label for="people">作品名称：</label>
+                    <input type="text" name="productionName" id="people"/>
+                    <span>*作品描述</span>
+                </div>
+                <div>
+                    <label>指导老师：</label>
+                    <select name="teacherId" >
+                        <option value="">--请选择导师--</option>
+                        <option th:each="teacher : ${teachers}" th:value="${teacher.tid}" th:text="${teacher.teacherName}" value="">北京市粮油总公司</option>
+                    </select>
+                </div>
+                <div>
+                    <label>参赛学生：</label>
+                    <select name="studentId" >
+                        <option value="">--请选择学生--</option>
+                        <option  th:each="student : ${students}" th:value="${student.sid}" th:text="${student.studentName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>比赛项目：</label>
+                    <select name="raceId" >
+                        <option value="">--请选择比赛项目--</option>
+                        <option  th:each="race : ${races}" th:value="${race.rid}" th:text="${race.raceName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>参赛状态：</label>
+                    <select name="teamStatus">
+                        <option value="">--请选择--</option>
+                        <option  value="1">已参赛</option>
+                        <option selected value="0">未参赛</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="people">作品简介：</label>
+                    <textarea name="productionInfo" style="height:100px;width: 200px ;resize:none"></textarea>
+
+                    <span>*作品简介</span>
+                </div>
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+<script type="text/javascript" th:inline="javascript">
+    var isCheck = false;
+    // 队伍失去焦点
+    $("#oldPassword").blur(function () {
+        var oldPassword = $(this).val().trim();
+        if(!oldPassword){
+            //   $("#pwdText").css({'color':'red'});
+            $("#pwdText").replaceWith("<span style='color: red' id='pwdText'>*请输入队伍名称</span>")
+            isCheck = false;
+            return;
+        }
+
+        //使用thymeleaf进行行内表达式
+        var url = [[@{/teams/team/}]] + oldPassword;
+        //ajax 进行异步请求
+        $.ajax({
+            url:url,
+            dataType:'json',
+            method:'GET',
+            success:function (data) {
+                isCheck = data;
+                data ? $("#pwdText").replaceWith("<span style='color: red' id='pwdText' >*该队伍已被使用 -_-</span>")
+                    : $("#pwdText").replaceWith("<span style='color: deepskyblue' id='pwdText'>*该队伍未被使用可以注册</span>")
+            },
+            error:function(){
+                $("#pwdText").html("校验队伍异常");
+                isCheck = false;
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.competition.mapper.TeacherMapper">
+
+    <select id="getLists" resultType="com.competition.entities.Teacher">
+        select * from teacher_info where  1=1 and teacher_status=0
+        <if test="teacherName != '' and teacherName != null">
+            and teacher_name like '%${teacherName}%'
+        </if>
+        <if test="teacherMobile != '' and teacherMobile != null">
+            and teacher_mobile like '%${teacherMobile}%'
+        </if>
+    </select>
+
+    <insert id="addTeacher">
+        INSERT INTO `teacher_info`( `teacher_name`, `teacher_sex`, `teacher_profession`, `teacher_number`, `teacher_password`, `teacher_mobile`, `teacher_work`, `teacher_status`,`login_time`)
+        VALUES (#{teacherName},#{teacherSex},#{teacherProfession},#{teacherNumber},#{teacherPassword},#{teacherMobile},#{teacherWork},#{teacherStatus},now())
+    </insert>
+
+    <update id="updateTeacher">
+        UPDATE `teacher_info`
+        SET `teacher_name` = #{teacherName}, `teacher_sex` = #{teacherSex}, `teacher_profession` = #{teacherProfession}, `teacher_number` = #{teacherNumber}, `teacher_password` = #{teacherPassword}, `teacher_mobile` =#{teacherMobile}, `teacher_work` = #{teacherWork}, `teacher_status` = #{teacherStatus},`login_time` = now()
+        WHERE `tid` = #{tid};
+    </update>
+
+    <select id="getTeacherByTeacherNumber" resultType="com.competition.entities.Teacher">
+        select * from teacher_info where teacher_number=#{number}
+    </select>
+
+    <select id="getTeacherById" resultType="com.competition.entities.Teacher">
+        select * from teacher_info where tid=#{tid}
+    </select>
+
+
+    <delete id="deleteTeacherById">
+        delete from teacher_info where tid=#{tid}
+    </delete>
+
+</mapper>

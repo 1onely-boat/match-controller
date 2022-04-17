@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='team')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>队伍管理页面 >> 查看队伍</span>
+        </div>
+        <div class="providerView">
+            <p><strong>队伍名称：</strong><span th:text="${student.teamName}">PRO-CODE—001</span></p>
+            <p><strong>导师名称：</strong><span th:text="${student.teacherName}">PRO-CODE—001</span></p>
+            <p><strong>作品名称：</strong><span th:text="${student.productionName}">PRO-CODE—001</span></p>
+            <p><strong>作品简介：</strong><span th:text="${student.productionInfo}">PRO-CODE—001</span></p>
+            <p><strong>比赛名称：</strong><span th:text="${student.raceName}">PRO-CODE—001</span></p>
+            <p><strong>比赛级别：</strong><span th:text="${student.raceLevel}">PRO-CODE—001</span></p>
+            <p><strong>参赛学生组长姓名：</strong><span th:text="${student.studentName}">PRO-CODE—001</span></p>
+            <p><strong>参赛学生组长电话：</strong><span th:text="${student.studentMobile}"></span></p>
+            <p><strong>队伍报名状态：</strong><span th:text="${student.teamStatus == 1 ? '已报名':'未报名'}">PRO-CODE—001</span></p>
+            <p><strong>比赛开始时间：</strong><span th:text="${#dates.format(student.raceBegintime,'yyyy-MM-dd')}">PRO-CODE—001</span></p>
+            <p><strong>比赛结束时间：</strong><span th:text="${#dates.format(student.raceEndtime,'yyyy-MM-dd')}">PRO-CODE—001</span></p>
+
+            <a th:href="@{/team}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

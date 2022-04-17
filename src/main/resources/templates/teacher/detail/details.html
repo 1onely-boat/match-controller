@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='details')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>教师工作量管理 >> 教师工作量</span>
+        </div>
+
+        <form id="searchForm">
+            <div class="search">
+                <a th:method="get" th:href="@{/write}" href="#">导出</a>
+            </div>
+        </form>
+
+        <span > 教师姓名:<h1 style="color: darkorange" th:text="${teacher.teacherName}"></h1></span>
+        <span > 教师职位:<h1 style="color: darkorange" th:text="${teacher.teacherProfession}"></h1></span>
+        <span > 教师工号:<h1 style="color: darkorange" th:text="${teacher.teacherNumber}"></h1></span>
+        <span> 指导项目数目:<h1 style="color: darkorange" th:text="${totalnum}"></h1></span>
+        <span> 总工作量:<h1 style="color: darkorange" th:text="${total}"></h1></span>
+        <!--教师操作-->
+        <table class="providerTable" cellpadding="0" cellspacing="0" >
+            <tr class="firstTr">
+
+
+                <th width="25%">参与比赛名称</th>
+                <th width="25%">参与队伍名称</th>
+                <th width="25%">比赛级别</th>
+                <th width="25%">工作量</th>
+
+            </tr>
+            <tr th:each="p: ${pageInfo}">
+
+                <td th:text="${p.raceName}">PRO-CODE—001</td>
+                <td th:text="${p.teamName}">PRO-CODE—001</td>
+                <td th:text="${p.raceLevel==1?'校级':p.raceLevel == 2?'省级':'国家级'}">PRO-CODE—001</td>
+                <td th:text="${p.raceLevel==1?'0.8':p.raceLevel == 2?'1':'1'}">PRO-CODE—001</td>
+            </tr>
+            <tr>
+
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button style="size: 15px;line-height:15px;border-radius: 5%;width: 50px;height: 30px;line-height: 30px;font-size: 20px;border-color: #0c89de;color: #3d4f1b" onclick="history.back(-1)">返回</button></td>
+
+
+            </tr>
+        </table>
+    </div>
+
+</section>
+
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='student')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>学生管理页面 >> 查看学生</span>
+        </div>
+        <div class="providerView">
+            <p><strong>学生学号：</strong><span th:text="${student.studentNumber}">PRO-CODE—001</span></p>
+            <p><strong>学生姓名：</strong><span th:text="${student.studentName}">PRO-CODE—001</span></p>
+            <p><strong>学生性别：</strong><span th:text="${student.studentSex}">PRO-CODE—001</span></p>
+            <p><strong>学生班级：</strong><span th:text="${student.studentClass}"></span></p>
+            <p><strong>学生电话：</strong><span th:text="${student.studentMobile}"></span></p>
+            <p><strong>学生微信：</strong><span th:text="${student.studentWechar}"></span></p>
+            <p><strong>报名状态：</strong><span th:text="${student.studentStatus == 1 ? '已报名':'未报名'}"></span></p>
+
+            <a th:href="@{/mstudentManager}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='teacher')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>教师管理页面 >> 查看教师</span>
+        </div>
+        <div class="providerView">
+            <p><strong>教师工号：</strong><span th:text="${teacher.teacherNumber}">PRO-CODE—001</span></p>
+            <p><strong>教师姓名：</strong><span th:text="${teacher.teacherName}">PRO-CODE—001</span></p>
+            <p><strong>教师职位：</strong><span th:text="${teacher.teacherProfession}">PRO-CODE—001</span></p>
+            <p><strong>教师性别：</strong><span th:text="${teacher.teacherSex}"></span></p>
+            <p><strong>教师密码：</strong><span th:text="${teacher.teacherPassword}"></span></p>
+            <p><strong>教师手机号：</strong><span th:text="${teacher.teacherMobile}"></span></p>
+
+            <a th:href="@{/teacherManager}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

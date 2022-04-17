@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="teacher/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="teacher/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="teacher/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="teacher/public :: #public_left(activeUri='award')">
+    </div>
+    <div class="right" style="position: relative">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>比赛管理页面 >> 查看比赛结果</span>
+        </div>
+        <div class="providerView" style="position: relative;height: 400px">
+            <p><strong>比赛名称：</strong><span th:text="${award.raceName}">PRO-CODE—001</span></p>
+            <p></p>
+            <p><strong>队伍名称：</strong><span th:text="${award.teamName }"></span></p>
+            <p></p>
+            <p><strong>第一指导老师：</strong><span  th:text="${award.teacherName }"></span></p>
+            <p></p>
+            <p><strong>证书级别：</strong><span th:text="${award.certificateLevel }">PRO-CODE—001</span></p>
+            <p></p>
+            <p><strong>证书编号：</strong><span th:text="${award.certificateNumber }">PRO-CODE—001</span></p>
+            <p></p>
+            <p><strong>获奖情况：</strong><span th:text="${award.ifAward == 1 ? '已获奖' : '未获奖'}">15918230478</span></p>
+            <div style="position: absolute;top: 3px;right: 45px;width: 525px;height: 28px">
+                <strong style="position: absolute ;top: 0px;left: 0px">现场照片：</strong>
+                <strong style="position: absolute ;top: 0px;right: 20px">证书照片：</strong>
+            </div>
+            <img th:src="@{/img/goods/}+${award.certificatePicture}" style="position: absolute;top: 44px;right: 2px;width: 250px;height: 230px;border:1px"/>
+            <img th:src="@{/img/goods/}+${award.activityPicture}" style="position: absolute;top: 44px;right: 280px;width: 250px;height: 230px;border:1px"/>
+            <p></p>
+            <p></p>
+            <a style="position: relative;border-color: deepskyblue" th:href="@{/awards}" href="list.html">返回</a>
+
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="teacher/public :: #public_footer">
+</footer>
+</body>
+</html>

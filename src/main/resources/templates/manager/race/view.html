@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='race')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>比赛管理页面 >> 查看比赛</span>
+        </div>
+        <div class="providerView">
+            <p><strong>比赛名称：</strong><span th:text="${race.raceName}">PRO-CODE—001</span></p>
+            <p><strong>比赛级别：</strong><span th:text="${race.raceLevel ==1 ? '校级' : race.raceLevel == 2 ? '省级' : '国家级'}">PRO-CODE—001</span></p>
+            <p><strong>主办方：</strong><span th:text="${race.raceMaster }"></span></p>
+            <p><strong>比赛位置：</strong><span  th:text="${race.raceLocation }"></span></p>
+            <p><strong>报名开始时间：</strong><span th:text="${#dates.format(race.beginTime,'yyyy-MM-dd')}">PRO-CODE—001</span></p>
+            <p><strong>报名结束时间：</strong><span th:text="${#dates.format(race.endTime,'yyyy-MM-dd')}"></span></p>
+            <p><strong>比赛开始时间：</strong><span th:text="${#dates.format(race.raceBegintime,'yyyy-MM-dd')}">韩露</span></p>
+            <p><strong>比赛结束时间：</strong><span th:text="${#dates.format(race.raceEndtime,'yyyy-MM-dd')}">15918230478</span></p>
+            <a th:href="@{/mrace}" href="list.html">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+</body>
+</html>

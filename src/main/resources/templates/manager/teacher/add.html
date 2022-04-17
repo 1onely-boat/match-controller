@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--路径下面不能加/-->
+<head lang="en" th:replace="manager/public :: #public_head">
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="manager/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="manager/public :: #public_time">
+</section>
+
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="manager/public :: #public_left(activeUri='teacher')">
+    </div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>教师管理页面 >> 教师添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/addteacher}" th:method="post" action="#">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="providerName">教师工号：</label>
+                    <input type="text" name="teacherNumber" id="providerName"/>
+                    <span >*请输入教师工号</span>
+                </div>
+                <div>
+                    <label for="people">教师姓名：</label>
+                    <input type="text" name="teacherName" id="people"/>
+                    <span>*请输入教师姓名</span>
+
+                </div>
+                <div>
+                    <label>教师性别：</label>
+                    <select name="teacherSex">
+                        <option value="">--请选择--</option>
+                        <option  value="男">男</option>
+                        <option  value="女">女</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="address">教师职位：</label>
+                    <input type="text" name="teacherProfession" id="address"/>
+                    <span>*请输入教师职位</span>
+                </div>
+                <div>
+                    <label >教师电话：</label>
+                    <input type="text" name="teacherMobile"/>
+                    <span>*请输入教师电话</span>
+                </div> <div>
+                    <label >教师密码：</label>
+                    <input type="text" name="teacherPassword" value="000000" />
+                    <span>*请输入教师密码</span>
+                </div>
+                <input type="hidden" name="teacherStatus" value="0"/>
+
+                <div class="providerAddBtn">
+                    <input type="button" value="保存" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" th:replace="manager/public :: #public_footer">
+</footer>
+
+</body>
+</html>
