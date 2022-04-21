@@ -100,7 +100,7 @@ public class TeamController {
 
     //添加数据
     @PostMapping("/teams")
-    public String add(Team team) {
+    public String add(Team team) throws Exception{
 
         logger.info("添加teamList的数据" + team);
         team.setUpdateId(team.getTeacherId());

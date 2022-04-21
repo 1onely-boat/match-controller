@@ -15,6 +15,12 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     FinancialMapper financialMapper;
+
+    @Override
+    public List<FinancialList> myList(FinancialList financialList, Integer tid) {
+        return financialMapper.getMyLists(financialList, tid);
+    }
+
     @Override
     public List<FinancialList> list(FinancialList financialList) {
         return financialMapper.getLists(financialList);

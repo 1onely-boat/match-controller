@@ -13,7 +13,7 @@
 
 <!--头部-->
     <header class="publicHeader" id="public_header">
-        <h1>软件学院比赛管理系统(教师端)</h1>
+        <h1>软件学院比赛管理系统(学生端)</h1>
         <div class="publicHeaderR">
             <p><span id="hours"></span>!<span style="color: #fff21b"> <a th:href="@{/teacher/showDetails}">[[${session.loginUser.teacherName}]]</a></span> , 欢迎你！</p>
             <a  th:href="@{/logout}" href="login.html">退出</a>
@@ -33,12 +33,12 @@
             <nav>
                 <ul class="list">
                     <li th:id="${activeUri=='competition' ? 'active': ''}"><a th:href="@{/trace}" href="../bill/list.html">查看比赛</a></li>
-                    <li th:id="${activeUri=='student' ? 'active': ''}"><a  th:href="@{/tstudentManager}" href="../provider/list.html">学生管理</a></li>
-                    <li th:id="${activeUri=='teams' ? 'active': ''}"><a th:href="@{/teams}" href="../user/list.html">队伍管理</a></li>
+                    <li th:id="${activeUri=='student' ? 'active': ''}"><a  th:href="@{/tstudentManager}" href="../provider/list.html">学生列表</a></li>
+                    <li th:id="${activeUri=='teams' ? 'active': ''}"><a th:href="@{/teams}" href="../user/list.html">我的队伍</a></li>
                     <li th:id="${activeUri=='financial' ? 'active': ''}"><a th:href="@{/financials}" href="../user/list.html">经费管理</a></li>
                     <li th:id="${activeUri=='pwd' ? 'active': ''}"><a th:href="@{/password}" href="../main/login.html">修改密码</a></li>
-                    <li th:id="${activeUri=='award' ? 'active': ''}"><a th:href="@{/awards}" href="../main/password.html">比赛结果管理</a></li>
-                    <li th:id="${activeUri=='details' ? 'active': ''}"><a th:href="@{/teacher/showDetails}" href="../main/password.html">查看工作量</a></li>
+                    <li th:id="${activeUri=='award' ? 'active': ''}"><a th:href="@{/awards}" href="../main/password.html">比赛结果查看</a></li>
+<!--                    <li th:id="${activeUri=='details' ? 'active': ''}"><a th:href="@{/teacher/showDetails}" href="../main/password.html">查看工作量</a></li>-->
                 </ul>
             </nav>
         </div>

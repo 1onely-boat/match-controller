@@ -29,6 +29,7 @@
                 <span>班级：</span>
                 <input type="text" th:value="${studentClass}"  name="studentClass" placeholder="请输入学生班级"/>
                 <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+                <a th:href="@{/addstudent}" th:method="get" href="add.html">添加学生信息</a>
               </div>
         </form>
         <!--经费操作表格-->
@@ -50,7 +51,12 @@
                 <td th:text="${p.studentWechar}">122333wx</td>
                 <td th:text="${p.studentStatus == 1 ? '已报名' : '未报名'}">未报名</td>
                 <td>
-                    <a th:href="@{/mstudent/}+${p.sid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
+<!--                    <a th:href="@{/mstudent/}+${p.sid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>-->
+
+                    <a th:href="@{/student/}+${p.sid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
+                    <a th:href="@{/student/}+${p.sid}+'?type=update'" href="update.html"><img th:src="@{/img/xiugai.png}"  alt="修改" title="修改"/></a>
+                    <!--  绑定属性    -->
+                    <a th:attr="del_uri=@{/student/}+${p.sid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>
                 </td>
             </tr>
 
@@ -68,7 +74,21 @@
         </table>
     </div>
 </section>
-
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<form method="post", id="deleteForm">
+    <input type="hidden" name="_method" value="delete">
+    <div class="remove" id="removeProv">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain" >
+                <p>你确定要删除吗？</p>
+                <a href="#" id="yes">确定</a>
+                <a href="#" id="no">取消</a>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 

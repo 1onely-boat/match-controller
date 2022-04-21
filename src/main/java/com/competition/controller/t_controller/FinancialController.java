@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -30,13 +31,17 @@ public class FinancialController {
     @Autowired
     PredictFinancialService predictFinancialService;
 
+
+
     //经费管理
     @GetMapping("/financials")
-    public String list(Map<String, Object> map, FinancialList financialList, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
+    public String list(HttpSession session, Map<String, Object> map, FinancialList financialList, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
+
+        Teacher loginUser = (Teacher)session.getAttribute("loginUser");
         //分页为12条一页
 
         PageHelper.startPage(pageNum, 12);
-        List<FinancialList> list = financialService.list(financialList);
+        List<FinancialList> list = financialService.myList(financialList, loginUser.getTid());
         PageInfo<FinancialList> pageInfo = new PageInfo<FinancialList>(list);
         for (FinancialList f : list) {
             f.setTotalFee(f.getRoomFee() + f.getCarFee() + f.getPaymentFee());
@@ -51,8 +56,9 @@ public class FinancialController {
      * 跳转到添加经费addFinancial
      **/
     @GetMapping("/toAddFinancial")
-    public String toadd(Model map) {
-        List<TeamList> list = teamService.list(new TeamList());
+    public String toadd(Model map, HttpSession session) {
+        Teacher loginUser = (Teacher)session.getAttribute("loginUser");
+        List<TeamList> list = teamService.myList(new TeamList(), loginUser.getTid());
         List<Race> list2 = raceService.list(new Race());
         List<PredictFinancialList> list1 = predictFinancialService.list(new PredictFinancialList());
         map.addAttribute("races", list2);

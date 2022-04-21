@@ -6,7 +6,24 @@
 
 <mapper namespace="com.competition.mapper.FinancialMapper">
 
+    <select id="getMyLists" resultType="com.competition.entities.FinancialList">
+        select t.*,pred.payment_price,pred.car_price,pred.room_price,pred.total_price,tem.team_name,r.race_name
+        from final_finance t
 
+
+        left join predict_finance pred
+        on t.pre_id = pred.preid
+
+        left join team_info tem
+        on  t.team_id = tem.temid
+
+        left join race_info r
+        on  t.race_id = r.rid
+
+        where tem.teacher_id = #{tid}
+
+
+    </select>
 
     <select id="getLists" resultType="com.competition.entities.FinancialList">
         select t.*,pred.payment_price,pred.car_price,pred.room_price,pred.total_price,tem.team_name,r.race_name

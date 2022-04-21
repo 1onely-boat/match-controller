@@ -23,19 +23,19 @@
         </div>
         <div class="providerAdd">
             <form id="addForm" th:action="@{/addFinancial}" th:method="post" action="#">
-                <div>
-                    <label>预计项目：</label>
-                    <select name="preid" id="prerace">
-<!--<option value="">&#45;&#45;请选择预计比赛项目&#45;&#45;</option>-->
-                        <option  th:each="predictList : ${predictLists}" th:value="${predictList.preid}" th:text="${predictList.raceName}"></option>
-                    </select>
-                </div>
+<!--                <div>-->
+<!--                    <label>预计项目：</label>-->
+<!--                    <select name="preid" id="prerace">-->
+<!--&lt;!&ndash;<option value="">&#45;&#45;请选择预计比赛项目&#45;&#45;</option>&ndash;&gt;-->
+<!--                        <option  th:each="predictList : ${predictLists}" th:value="${predictList.preid}" th:text="${predictList.raceName}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
 
-                <input type="hidden" name="race" />
+<!--                <input type="hidden" name="race" />-->
                <div>
-                    <label>比赛项目(同上一致)：</label>
+                    <label>比赛项目：</label>
                     <select name="raceId" id="race" >
-<!--<option value="">&#45;&#45;请选择比赛项目&#45;&#45;</option>-->
+<!--<option value="">--请选择比赛项目--</option>-->
                         <option  th:each="race : ${races}" th:value="${race.rid}" th:text="${race.raceName}"></option>
                     </select>
                 </div>

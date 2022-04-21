@@ -54,36 +54,36 @@ public class StudentController {
     }
 
 
-    //修改学生信息
-    @PutMapping("/student")
-    public String update(Student student) {
-
-        studentService.updateStudent(student);
-        return "redirect:/tstudentManager";
-    }
-
-    //跳转到添加页面
-    @GetMapping("/addstudent")
-    public String toAddPage(Map<String, Object> map) {
-
-        return "teacher/student/add";
-    }
-
-    //添加数据
-    @PostMapping("/student")
-    public String add(Student student) {
-
-        logger.info("添加student的数据" + student);
-        //保存数据操作
-        studentService.addStudent(student);
-        return "redirect:/tstudentManager";
-    }
-
-    //删除数据
-    @DeleteMapping("/student/{sid}")
-    public String deleteBill(@PathVariable("sid") Integer sid) {
-        studentService.deleteStudent(sid);
-        return "redirect:/tstudentManager";
-    }
+//    //修改学生信息
+//    @PutMapping("/student")
+//    public String update(Student student) {
+//
+//        studentService.updateStudent(student);
+//        return "redirect:/tstudentManager";
+//    }
+//
+//    //跳转到添加页面
+//    @GetMapping("/addstudent")
+//    public String toAddPage(Map<String, Object> map) {
+//
+//        return "teacher/student/add";
+//    }
+//
+//    //添加数据
+//    @PostMapping("/student")
+//    public String add(Student student) {
+//
+//        logger.info("添加student的数据" + student);
+//        //保存数据操作
+//        studentService.addStudent(student);
+//        return "redirect:/tstudentManager";
+//    }
+//
+//    //删除数据
+//    @DeleteMapping("/student/{sid}")
+//    public String deleteBill(@PathVariable("sid") Integer sid) {
+//        studentService.deleteStudent(sid);
+//        return "redirect:/tstudentManager";
+//    }
 
 }

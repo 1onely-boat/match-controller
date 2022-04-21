@@ -26,6 +26,7 @@
                 <span>比赛名称：</span>
                 <input type="text" th:value="${raceName}"  name="raceName" placeholder="请输入比赛名称"/>
                 <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
+                <a th:href="@{/addTeam}" th:method="get" href="add.html">添加报名信息</a>
             </div>
         </form>
         <!--经费操作表格-->

@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface FinancialService {
 
+
+    List<FinancialList> myList(FinancialList financialList, Integer tid);
+
     //List<Financial> list(Financial financial);
     List<FinancialList> list(FinancialList financialList);
 

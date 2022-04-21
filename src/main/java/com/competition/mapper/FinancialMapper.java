@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface FinancialMapper {
 
+
+    List<FinancialList> getMyLists(FinancialList financialList, Integer tid);
     //获得列表
     List<FinancialList> getLists(FinancialList financialList);
     //通过id查找

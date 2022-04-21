@@ -15,7 +15,7 @@ public interface TeamService {
     TeamList getTeamById(Integer temid);
 
     //int addTeam(TeamList teamList);
-    int addTeam(Team team);
+    int addTeam(Team team) throws Exception;
 
     int updateTeam(TeamList teamList);
 

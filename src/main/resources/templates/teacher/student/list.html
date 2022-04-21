@@ -29,7 +29,7 @@
                 <span>学生班级：</span>
                 <input type="text" th:value="${studentClass}"  name="studentClass" placeholder="请输入学生班级"/>
                 <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
-                <a th:href="@{/addstudent}" th:method="get" href="add.html">添加学生信息</a>
+<!--                <a th:href="@{/addstudent}" th:method="get" href="add.html">添加学生信息</a>-->
             </div>
         </form>
         <!--经费操作表格-->
@@ -52,9 +52,9 @@
                 <td th:text="${p.studentStatus == 1 ? '已报名' : '未报名'}">未报名</td>
                 <td>
                     <a th:href="@{/student/}+${p.sid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
-                    <a th:href="@{/student/}+${p.sid}+'?type=update'" href="update.html"><img th:src="@{/img/xiugai.png}"  alt="修改" title="修改"/></a>
-                    <!--  绑定属性    -->
-                    <a th:attr="del_uri=@{/student/}+${p.sid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>
+<!--                    <a th:href="@{/student/}+${p.sid}+'?type=update'" href="update.html"><img th:src="@{/img/xiugai.png}"  alt="修改" title="修改"/></a>-->
+<!--                    &lt;!&ndash;  绑定属性    &ndash;&gt;-->
+<!--                    <a th:attr="del_uri=@{/student/}+${p.sid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>-->
                 </td>
             </tr>
 

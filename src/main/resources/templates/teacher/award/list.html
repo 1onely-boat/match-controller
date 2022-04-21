@@ -29,7 +29,7 @@
                 <span>导师名称：</span>
                 <input type="text" th:value="${teacherName}"  name="teacherName" placeholder="请输入导师名字"/>
                 <input type="button" onclick="$('#searchForm').submit()" value="查询"/>
-                <a th:href="@{/addAward}" th:method="get" href="add.html">添加比赛结果</a>
+<!--                <a th:href="@{/addAward}" th:method="get" href="add.html">添加比赛结果</a>-->
             </div>
         </form>
         <!--经费操作表格-->
@@ -51,8 +51,8 @@
                 <td th:text="${p.ifAward == 1 ? '已获奖': '未获奖'}"></td>
                 <td th:text="${p.ifApprove ==1 ? '已批准':'未批准,请联系管理员'}"></td>
                 <td>
-                    <a th:href="@{/awards/}+${p.aid}" href="view.html"><img th:src="@{/img/read.png}"  alt="查看" title="查看"/></a>
-                    <a th:attr="del_uri=@{/awards/}+${p.aid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>
+                    <a th:href="@{/awards/}+${p.aid}" href="view.html"><img th:src="@{/img/read.png}" alt="查看" title="查看"/></a>
+<!--                    <a th:attr="del_uri=@{/awards/}+${p.aid}" href="#"  class="delete"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></a>-->
                 </td>
             </tr>
 

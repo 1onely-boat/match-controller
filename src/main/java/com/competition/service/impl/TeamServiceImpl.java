@@ -37,20 +37,20 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     WorkMapper workMapper;
     @Override
-    public int addTeam(Team team) {
+    public int addTeam(Team team){
         int temid = teamMapper.addTeamList(team);
-        TeamList teamByName = teamMapper.getTeamByName(team.getTeamName());
-
-        Work work = new Work();
-        if(team.getTeamStatus()==1){
-        work.setStatus(1);
-        }else {
-        work.setStatus(0);
-        }
-        work.setTeamId(teamByName.getTemid());
-        work.setTeacherId(team.getTeacherId());
-        work.setRaceId(team.getRaceId());
-        workMapper.addWork(work);
+//        TeamList teamByName = teamMapper.getTeamByName(team.getTeamName());
+//
+//        Work work = new Work();
+//        if(team.getTeamStatus()==1){
+//        work.setStatus(1);
+//        }else {
+//        work.setStatus(0);
+//        }
+//        work.setTeamId(teamByName.getTemid());
+//        work.setTeacherId(team.getTeacherId());
+//        work.setRaceId(team.getRaceId());
+//        workMapper.addWork(work);
         return temid;
     }
 
